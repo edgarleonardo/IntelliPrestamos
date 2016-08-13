@@ -1,0 +1,231 @@
+﻿@model IntelliPrestamos.Models.PerfilClienteViewModel
+@{
+     ViewBag.Title = "Perfil Cliente En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo maneja los pagos a prestamos configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Perfil Cliente</h3>
+    </div>
+@using (Html.BeginForm("Manage", "PerfilCliente", FormMethod.Get, new { enctype = "multipart/form-data", id = "FormDataInfo" }))
+    {
+    <div class="panel-body">
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Cedula</label>
+                        <input type="text" class="form-control" value="@Model.solicitante.Cedula" name="Cedula" id="Cedula" placeholder="999-9999999-9">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                <button type="submit" class="btn btn-info" >
+                    Consultar
+                </button>
+            </div>
+        </div>
+    </div>
+}
+        
+    <div id="content-ajax">
+        @if (Model != null && Model.solicitante != null && Model.solicitante.Cedula != null && Model.solicitante.Cedula.Trim() != "")
+        {  
+            @Html.Partial("~/Views/PerfilCliente/_perfil.cshtml", Model)            
+        } 
+        </div>
+    
+</div>
+@section Header{
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+
+}
+@section scripts{
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+<script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+<script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+
+<script type="text/javascript">
+    $('#Cedula').mask('999-9999999-9');
+    $('#Cedula2').mask('999-9999999-9');
+    
+    $('#Telefono').mask('999-999-9999');
+    $('.telClass').mask('999-999-9999');
+    $('#Fecha_Ingreso').datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    });
+    $('#FormDataInfo').bootstrapValidator({
+        message: 'This value is not valid',
+        excluded: [':disabled'],
+        feedbackIcons: faIcon,
+        fields: {
+            "solicitante.Cedula": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "solicitante.Nombre": {
+                validators: {
+                    notEmpty: {
+                        message: 'El Nombre no puede estar vacío'
+                    },
+                    regexp: {
+                        regexp: /^[A-Z\s]+$/i,
+                        message: 'El Nombre debe estar compuesto de letras alfabeticas y espacios'
+                    }
+                }
+            },
+            "solicitante.Direccion": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            }, "solicitante.Sector": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            }, "solicitante.Fecha_Ingreso": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "solicitante.Apellidos": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "solicitante.Telefono": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "solicitante.Celular": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "solicitante.Telefono": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "Fuente_Ingreso.Nombre_Trabajo": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "Fuente_Ingreso.Direccion": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "Fuente_Ingreso.telefono": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    }
+                }
+            },
+            "Fuente_Ingreso.Sueldo_Actual": {
+                container: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    },
+                    greaterThan: {
+                        inclusive: false,
+                        //If true, the input value must be greater than or equal to the comparison one.
+                        //If false, the input value must be greater than the comparison one
+                        value: 0,
+                        message: 'El valor debe ser mayor que cero'
+                    }
+                }
+            },
+            "Fuente_Ingreso.Sueldo_Actual": {
+                validators: {
+                    notEmpty: {
+                        message: 'Requerido'
+                    },
+                    numeric: {
+                        message: 'El valor debe ser numerico'
+                    },
+                    greaterThan: {
+                        inclusive: false,
+                        //If true, the input value must be greater than or equal to the comparison one.
+                        //If false, the input value must be greater than the comparison one
+                        value: 0,
+                        message: 'El valor debe ser mayor que cero'
+                    }
+                }
+            },
+
+
+        }
+    }).on('status.field.bv', function (e, data) {
+        var $form = $(e.target),
+        validator = data.bv,
+        $tabPane = data.element.parents('.tab-pane'),
+        tabId = $tabPane.attr('id');
+
+        if (tabId) {
+            var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+            // Add custom class to tab containing the field
+            if (data.status == validator.STATUS_INVALID) {
+                $icon.removeClass(faIcon.valid).addClass(faIcon.invalid);
+            } else if (data.status == validator.STATUS_VALID) {
+                var isValidTab = validator.isValidContainer($tabPane);
+                $icon.removeClass(faIcon.valid).addClass(isValidTab ? faIcon.valid : faIcon.invalid);
+            }
+        }
+    });
+</script>
+    }

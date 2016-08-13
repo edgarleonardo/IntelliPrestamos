@@ -1,0 +1,90 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Cargo>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <caption>
+            @if (ViewBag.DownloadLink != null)
+            {
+                <a href="../TmpFiles/@ViewBag.DownloadLink" class="btn btn-mint btn-rounded">Descargar Excel</a>
+            }
+        </caption>
+        <thead>
+            <tr>
+                <th style="width:4ex"></th>
+                <th>Cargo ID</th>
+                <th>Nombre</th>
+                <th>Es Gerencial</th>
+                <th>Es Accionista</th>
+                <th>Activo</th>
+                <th class="text-right">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a onclick="showModalConfig(this,  '@(item.Id_Cargo)', '_Get');" style="cursor: pointer; color: #337ab7;" data-url="@(Url.Action("Get", "Cargo"))">Visualizar</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Id_Cargo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>
+                        @if (item.EsGerencial != null && item.EsGerencial == 1)
+                        {
+                            <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.EsAccionista != null && item.EsAccionista == 1)
+                        {
+                            <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Activo != null && item.Activo == 1)
+                        {
+                            <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.Id_Cargo)','_Add');" data-original-title="Editar" data-container="body" data-url="@(Url.Action("Get", "Cargo"))"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this,  '@(item.Id_Cargo)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "Cargo"))"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Solicitud>
+@{
+    ViewBag.Title = "Gestión Solicitudes Aprobadas En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo muestra las solicitudes creadas en sistema pendientes de aprobacion para editar o desestimar.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Gestión Solicitudes Aprobadas En Sistema</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Solicitud/_ViewAprobacion.cshtml", Model)
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+
+
+}

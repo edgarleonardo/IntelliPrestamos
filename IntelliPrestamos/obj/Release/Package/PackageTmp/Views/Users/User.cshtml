@@ -1,0 +1,155 @@
+﻿@model IntelliPrestamos.Models.Empleado
+@{
+    ViewBag.Title = "Cargar Datos Del Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Users/_Add.cshtml", Model)
+
+@section scripts{
+    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+<script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+
+    <script type="text/javascript">
+        $('#Cedula').mask('999-9999999-9');
+        $('.telClass').mask('999-999-9999');
+        $('#Fecha_Salida').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#Fecha_Ingreso').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#Fecha_Nacimiento').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#AddForm').bootstrapValidator({
+            message: 'Este Valor No Es Valido',
+            excluded: [':disabled'],
+            feedbackIcons: faIcon,
+            fields: {
+                Nombre: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'El Nombre no puede estar vacío'
+                        },
+                        regexp: {
+                            regexp: /^[A-Z\s]+$/i,
+                            message: 'El Nombre debe estar compuesto de letras alfabeticas y espacios'
+                        }
+                    }
+                },
+                Direccion: {
+                    validators: {
+                        notEmpty: {
+                            message: 'El Direccion no puede estar vacío'
+                        }
+                    }
+                },
+                Apellidos: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Apellidos Es obligatorío'
+                        },
+                        regexp: {
+                            regexp: /^[A-Z\s]+$/i,
+                            message: 'El Apellidos debe estar compuesto de letras alfabeticas y espacios'
+                        }
+                    }
+                },
+                Telefono: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Telefono Es obligatorío'
+                        }
+                    }
+                },
+                Celular: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Celular Es obligatorío'
+                        }
+                    }
+                },
+                Fecha_Nacimiento: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Fecha_Nacimiento Es obligatorío'
+                        }
+                    }
+                },
+                Fecha_Ingreso: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Fecha_Ingreso Es obligatorío'
+                        }
+                    }
+                },
+                "User.Usuario": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Usuario Es obligatorío'
+                        }
+                    }
+                },
+                "User.Clave": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Clave Es obligatorío'
+                        }
+                    }
+                },
+                "User.email": {
+                    validators: {
+                        notEmpty: {
+                            message: 'El email Es obligatorío'
+                        },
+                        emailAddress: {
+                            message: 'No es una direccion valida'
+                        }
+                    }
+                },
+                Cedula: {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Cedula Es obligatorío'
+                        }
+                    }
+                }
+            }
+        }).on('status.field.bv', function (e, data) {
+            var $form = $(e.target),
+            validator = data.bv,
+            $tabPane = data.element.parents('.tab-pane'),
+            tabId = $tabPane.attr('id');
+
+            if (tabId) {
+                var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+                // Add custom class to tab containing the field
+                if (data.status == validator.STATUS_INVALID) {
+                    $icon.removeClass(faIcon.valid).addClass(faIcon.invalid);
+                } else if (data.status == validator.STATUS_VALID) {
+                    var isValidTab = validator.isValidContainer($tabPane);
+                    $icon.removeClass(faIcon.valid).addClass(isValidTab ? faIcon.valid : faIcon.invalid);
+                }
+            }
+        });
+    </script>
+}

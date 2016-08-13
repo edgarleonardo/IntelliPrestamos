@@ -1,0 +1,331 @@
+﻿@model IntelliPrestamos.Models.Solicitud
+@{
+    ViewBag.Title = "Crear Nueva Solicitud En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo permite crear nuevas solicitudes de prestamos en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Manejo Solicitud En Sistema</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                   
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Solicitud/_Add.cshtml", Model)
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header
+    {
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts
+{
+    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            $("#Cedula").keyup(function () {
+                var valor = $(this).val();
+                var isNew = $("#solicitudIdInfo").val();
+                var LastIdConsulted = $("#LastIdConsulted").val();
+                if (valor.length == 13 && valor.indexOf("_") == -1 && isNew == 0 && LastIdConsulted != valor)
+                {
+                    GetAppliant(this, valor);
+                    LastIdConsulted = valor;
+                 }
+            });
+        });
+        $('#Cedula').mask('999-9999999-9');
+        
+        $('#Celular').mask('999-999-9999');
+        $('#Telefono').mask('999-999-9999');
+        $('.telClass').mask('999-999-9999');
+        $('#Fecha_Ingreso').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#FormDataInfo').bootstrapValidator({
+            message: 'This value is not valid',
+            excluded: [':disabled'],
+            feedbackIcons: faIcon,
+            fields: {
+                "solicitante.Cedula": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "solicitante.Nombre": {
+                    validators: {
+                        notEmpty: {
+                            message: 'El Nombre no puede estar vacío'
+                        },
+                        regexp: {
+                            regexp: /^[A-Z\s]+$/i,
+                            message: 'El Nombre debe estar compuesto de letras alfabeticas y espacios'
+                        }
+                    }
+                },
+                "solicitante.Direccion": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                }, "solicitante.Sector": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                }, "solicitante.Fecha_Ingreso": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "solicitante.Apellidos": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "solicitante.Telefono": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "solicitante.Celular": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "solicitante.Telefono": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "Fuente_Ingreso.Nombre_Trabajo": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "Fuente_Ingreso.Direccion": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "Fuente_Ingreso.telefono": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        }
+                    }
+                },
+                "Fuente_Ingreso.Sueldo_Actual": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                }, "Monto_Prestamo": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                }, "Plazo": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        lessThan: {
+                            inclusive: false,
+                            //If true, the input value must be less than or equal to the comparison one.
+                            //If false, the input value must be less than the comparison one
+                            value: 200,
+                            message: 'El plazo no puede ser mayor que 200'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                }, "Ingresos_Solicitante": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                }, "Dia_Pago": {
+                    container: 'tooltip',
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                },
+                "Fuente_Ingreso.Sueldo_Actual": {
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        numeric: {
+                            message: 'El valor debe ser numerico'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                },
+                /*"Ingresos_Solicitante": {
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        numeric: {
+                            message: 'El valor debe ser numerico'
+                        }
+                    }
+                },*/
+                "Monto_Prestamo": {
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        numeric: {
+                            message: 'El valor debe ser numerico'
+                        },
+                        greaterThan: {
+                            inclusive: false,
+                            //If true, the input value must be greater than or equal to the comparison one.
+                            //If false, the input value must be greater than the comparison one
+                            value: 0,
+                            message: 'El valor debe ser mayor que cero'
+                        }
+                    }
+                },
+                "Interes": {
+                    validators: {
+                        notEmpty: {
+                            message: 'Requerido'
+                        },
+                        numeric: {
+                            message: 'El valor debe ser numerico'
+                        }, between: {
+            min:1,
+            max:100,
+            message: 'Elvalor debe estar entre 1 y 100'
+                            }
+                    }
+                }
+                
+            }
+        }).on('status.field.bv', function (e, data) {
+            var $form = $(e.target),
+            validator = data.bv,
+            $tabPane = data.element.parents('.tab-pane'),
+            tabId = $tabPane.attr('id');
+
+            if (tabId) {
+                var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+                // Add custom class to tab containing the field
+                if (data.status == validator.STATUS_INVALID) {
+                    $icon.removeClass(faIcon.valid).addClass(faIcon.invalid);
+                } else if (data.status == validator.STATUS_VALID) {
+                    var isValidTab = validator.isValidContainer($tabPane);
+                    $icon.removeClass(faIcon.valid).addClass(isValidTab ? faIcon.valid : faIcon.invalid);
+                }
+            }
+        });
+    </script>
+    }
+
+
+
+

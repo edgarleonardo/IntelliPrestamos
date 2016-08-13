@@ -1,0 +1,314 @@
+﻿@model IntelliPrestamos.Models.PerfilClienteViewModel
+<div class="panel">
+
+    <!-- Panel heading -->
+    <div class="panel-heading">
+        <div class="panel-control">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#demo-tabs-box-1" aria-expanded="true"><i class="fa"></i>Solicitante</a></li>
+                <li class=""><a data-toggle="tab" href="#demo-tabs-box-2" aria-expanded="false"><i class="fa"></i>Fuente Ingreso</a></li>
+                <li class=""><a data-toggle="tab" href="#demo-tabs-box-3" aria-expanded="false"><i class="fa"></i>Referencias</a></li>
+                <li class=""><a data-toggle="tab" href="#demo-tabs-box-4" aria-expanded="false"><i class="fa"></i>Solicitudes</a></li>
+                <li class=""><a data-toggle="tab" href="#demo-tabs-box-5" aria-expanded="false"><i class="fa"></i>Prestamos</a></li>
+            </ul>
+        </div>
+    </div>
+@using (Html.BeginForm("Save", "PerfilCliente", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormDataInfo" }))
+    {
+
+        <div class="panel-body">
+            <div class="tab-content">               
+
+     
+                    <!--SHOWING ERRORS IN TOOLTIP-->
+                    <!--===================================================-->
+                    <div id="demo-tabs-box-1" class="tab-pane fade active in">
+                        <h4 class="mar-btm text-thin">Solicitante</h4>
+                        <hr>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Cedula</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Cedula" name="solicitante.Cedula" id="Cedula2" placeholder="999-9999999-9" data-url="@(Url.Action("solicitante", "Solicitud"))">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Nombre</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Nombre" name="solicitante.Nombre" id="solicitante.Nombre">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellidos</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Apellidos" name="solicitante.Apellidos" id="solicitante.Apellidos">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Dirección</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Direccion" name="solicitante.Direccion" id="solicitante.Direccion">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Sector</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Sector" name="solicitante.Sector" id="solicitante.Sector">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Email" name="solicitante.Email" id="solicitante.Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Telefono</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Telefono" name="solicitante.Telefono" id="Telefono" placeholder="999-999-9999">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Celular</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Celular" name="solicitante.Celular" id="Celular" placeholder="999-999-9999">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Información Adicional Que Quiera Agregar</label>
+                                        <input type="text" class="form-control" value="@Model.solicitante.Opcional" name="solicitante.Opcional" id="solicitante.Opcional">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="demo-tabs-box-2" class="tab-pane fade">
+                        <h4 class="mar-btm text-thin">Fuente Ingreso</h4>
+                        <hr>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Institución Donde Trabaja</label>
+                                        <input type="text" class="form-control" value="@Model.Fuente_Ingreso.Nombre_Trabajo" name="Fuente_Ingreso.Nombre_Trabajo" id="Fuente_Ingreso.Nombre_Trabajo">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Dirección</label>
+                                        <input type="text" class="form-control" value="@Model.Fuente_Ingreso.Direccion" name="Fuente_Ingreso.Direccion" id="Fuente_Ingreso.Direccion">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Telefono</label>
+                                        <input type="text" class="form-control telClass" value="@Model.Fuente_Ingreso.telefono" name="Fuente_Ingreso.telefono" id="Fuente_Ingreso.telefono" placeholder="999-999-9999">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Flota</label>
+                                        <input type="text" class="form-control telClass" value="@Model.Fuente_Ingreso.flota" name="Fuente_Ingreso.flota" id="Fuente_Ingreso.flota" placeholder="999-999-9999">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Sueldo Actual</label>
+                                        <input type="text" class="form-control" value="@Model.Fuente_Ingreso.Sueldo_Actual" name="Fuente_Ingreso.Sueldo_Actual" id="Fuente_Ingreso.Sueldo_Actual">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tiene Internet Banking</label>
+                                        @Html.DropDownListFor(m => m.Fuente_Ingreso.Tiene_Int_Banking,
+                                                  new List<SelectListItem> {
+                                                       new SelectListItem { Value = "0" , Text = "No" },
+                                                       new SelectListItem { Value = "1" , Text = "Sí" }
+                                                    },
+new { @class = "form-control", @id = "Fuente_Ingreso.Tiene_Int_Banking", @nombre = "Fuente_Ingreso.Tiene_Int_Banking" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Cargo</label>
+                                        <input type="text" class="form-control" value="@Model.Fuente_Ingreso.Cargo" name="Fuente_Ingreso.Cargo" id="Fuente_Ingreso.Cargo">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha Ingreso</label>
+                                        <input type="text" class="form-control" value="@Model.Fuente_Ingreso.Fecha_Ingreso" name="Fuente_Ingreso.Fecha_Ingreso" id="Fecha_Ingreso">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Banco</label>
+                                        @Html.DropDownListFor(m => m.Fuente_Ingreso.ID_Banco, @ViewBag.GetDrpBanco as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Fuente_Ingreso.ID_Banco" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--===================================================-->
+                    <div id="demo-tabs-box-3" class="tab-pane fade">
+                        <h4 class="mar-btm text-thin">Referencias</h4>
+                        <hr>
+                        <div class="panel-body">
+                            @for (int i = 0; i < Model.referencias_Personales.Count; i++)
+                        {
+                                <h4 class="mar-btm text-thin">Referencia # @(i + 1)</h4>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Nombre</label>
+                                            @Html.HiddenFor(m => m.referencias_Personales[i].Version_No)
+                                            @Html.TextBoxFor(m => m.referencias_Personales[i].Nombre, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Apellidos</label>
+                                            @Html.TextBoxFor(m => m.referencias_Personales[i].Apellido, new { @class = "form-control " })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Telefono</label>
+                                            @Html.TextBoxFor(m => m.referencias_Personales[i].Telefono, new { @class = "form-control telClass", placeholder = "999-999-9999" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Tipo Relación</label>
+                                            @Html.DropDownListFor(m => m.referencias_Personales[i].Tipo_Referencia_Id,
+                                 @ViewBag.GetDrpRelacion as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Id_Banco" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                        </div>
+                    </div>
+                    <!--===================================================-->
+
+                    <div id="demo-tabs-box-4" class="tab-pane fade">
+                        <h4 class="mar-btm text-thin">Solicitudes</h4>
+                        <hr>
+                        <div class="panel-body">
+
+                            @if (Model.SolicitudPendiente != null)
+                            {
+                                <div class="panel-body">
+                                    <div class="pad-btm form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6 table-toolbar-left">
+                                                <h3 class="panel-title">Gestión Solicitudes Creadas En Sistema</h3>
+                                            </div>
+                                            <div class="col-sm-6 table-toolbar-right">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="content-ajax">
+                                        @Html.Partial("~/Views/Solicitud/_ViewProfile.cshtml", Model.SolicitudPendiente)
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.SolicitudAprobadas != null)
+                            {
+                                <div class="panel-body">
+                                    <div class="pad-btm form-inline">
+                                        <div class="row">
+                                            <div class="col-sm-6 table-toolbar-left">
+                                                <h3 class="panel-title">Solicitudes Aprobadas En Sistema</h3>
+                                            </div>
+                                            <div class="col-sm-6 table-toolbar-right">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="content-ajax">
+                                        @Html.Partial("~/Views/Solicitud/_ViewProfile.cshtml", Model.SolicitudAprobadas)
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div id="demo-tabs-box-5" class="tab-pane fade">
+                        <h4 class="mar-btm text-thin">Prestamos</h4>
+                        <hr>
+                        <div class="panel-body">
+                            @if (Model.Prestamos != null)
+                        {
+                            <div class="panel-body">
+                                <div class="pad-btm form-inline">
+                                    <div class="row">
+                                        <div class="col-sm-6 table-toolbar-left">
+                                            <h3 class="panel-title">Prestamos Activos En Sistema</h3>
+                                        </div>
+                                        <div class="col-sm-6 table-toolbar-right">
+                                            <div class="form-group">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="content-ajax">
+                                    @Html.Partial("~/Views/Pagos/_ViewPrestamos.cshtml", Model.Prestamos)
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                
+</div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                
+                <button type="submit" class="btn btn-primary" id="btnSaveModify" >Actualizar Datos Solicitante</button>
+            </div>
+        </div>
+}
+         <div id="content-modal_info"></div>
+    
+</div>

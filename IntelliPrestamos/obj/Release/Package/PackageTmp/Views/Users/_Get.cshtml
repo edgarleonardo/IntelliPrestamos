@@ -1,0 +1,175 @@
+﻿@model IntelliPrestamos.Models.Empleado
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Visualizar</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <!--Block Styled Form -->
+                    <!--===================================================-->
+
+                    <div class="panel">
+
+                        <!-- Panel heading -->
+                        <div class="panel-heading">
+                            <div class="panel-control">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#demo-tabs-box-1" aria-expanded="true"><i class="fa"></i>Datos Empleado</a></li>
+                                    <li class=""><a data-toggle="tab" href="#demo-tabs-box-2" aria-expanded="false"><i class="fa"></i>Datos Del Usuario</a></li>
+                                </ul>
+                            </div>
+                            <h3 class="panel-title">Agregar / Modificar Empleados</h3>
+                        </div>
+
+                        <!-- Panel body -->
+                        @using (Html.BeginForm("Add", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+        <div class="panel-body">
+            <div class="tab-content">
+
+                <!--SHOWING ERRORS IN TOOLTIP-->
+                <!--===================================================-->
+                <div id="demo-tabs-box-1" class="tab-pane fade active in">
+                    <h4 class="mar-btm text-thin">Datos Empleado</h4>
+                    <hr>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" value="@Model.Nombre" name="Nombre" id="Nombre" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Apellidos</label>
+                                    <input type="text" class="form-control" value="@Model.Apellidos" name="Apellidos" id="Apellidos" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cedula</label>
+                                    <input type="text" class="form-control" value="@Model.Cedula" name="Cedula" id="Cedula" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Direccion</label>
+                                    <input type="text" class="form-control" value="@Model.Direccion" name="Direccion" id="Direccion" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Telefono</label>
+                                    <input type="text" class="form-control" value="@Model.Telefono" name="Telefono" id="Telefono" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Celular</label>
+                                    <input type="text" class="form-control" value="@Model.Celular" name="Celular" id="Celular" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha Nacimiento</label>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class="form-control" value="@Model.Fecha_Nacimiento" name="Fecha_Nacimiento" id="Fecha_Nacimiento" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha Ingreso</label>
+                                    <div class="input-daterange input-group">
+                                        <input type="text" class="form-control" value="@Model.Fecha_Ingreso" name="Fecha_Ingreso" id="Fecha_Ingreso" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cargo</label>
+                                    @Html.DropDownListFor(m => m.Cargo_Id, @ViewBag.DrpCargo as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Cargo_Id", @disabled = "true" })
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Supervisor</label>
+                                        @Html.DropDownListFor(m => m.Id_Supervisor, @ViewBag.DrpSup as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Id_Supervisor", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="demo-tabs-box-2" class="tab-pane fade">
+                    <h4 class="mar-btm text-thin">Datos Del Usuario</h4>
+                    <hr>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre Usuario</label>
+                                    @Html.TextBoxFor(m => m.User.Usuario, new { @class = "form-control", @id = "Usuario", @disabled = "true" })
+                                    @*<input type="text" class="form-control" value="@Model.User.Usuario" name="Usuario" id="Usuario">*@
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Clave</label>
+                                    @Html.TextBoxFor(m => m.User.Clave, new { @class = "form-control", @id = "Clave", @disabled = "true" })
+                                    @*<input type="number" class="form-control" value="@Model.User.Clave" name="Clave" id="Clave">*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Rol</label>
+                                    @Html.DropDownListFor(m => m.User.Id_Rol, @ViewBag.DrpRol as IEnumerable<SelectListItem>, new { @class = "form-control", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", @id = "Email", @name = "User.Email", @disabled = "true" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("Get", "Users"))">Cerrar</button>
+            </div>
+        </div>
+        }
+                    </div>
+                    <!--===================================================-->
+                    <!--End Block Styled Form -->
+
+                </div>
+</div>
+            </div>
+        </div></div>
+                @section scripts{
+                    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+
+                }
+
+

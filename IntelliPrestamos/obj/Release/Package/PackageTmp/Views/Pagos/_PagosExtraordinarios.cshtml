@@ -1,0 +1,118 @@
+﻿@model IntelliPrestamos.Models.Prestamos
+<div class="panel">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">No. Prestamos @Model.Prestamo_Id</h3>
+    </div>
+    <div class="panel-body">
+        <h4 class="mar-btm text-thin">Prestamos</h4>
+        <hr>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Monto Aprobado</label>
+                        <input type="text" class="form-control" value="@Model.Monto_Aprobado" name="prestamos.Monto_Aprobado" id="Monto_Prestamo" readonly="true">
+                        
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Plazo</label>
+                        <input type="number" class="form-control" value="@Model.Plazo" name="prestamos.Plazo" id="Plazo" readonly="true">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Periodicidad</label>
+                        <input type="text" class="form-control" value="@Model.Periodicidad_Desc" name="prestamos.Periodicidad_Desc" id="Periodicidad_Desc" readonly="true">
+
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Estado</label>
+                        <input type="text" class="form-control" value="@Model.Status_Desc" name="prestamos.Status_Desc" id="Status_Desc" readonly="true">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Tasa Interes</label>
+                        <input type="text" class="form-control" value="@Model.Interes" name="prestamos.Interes" id="Interes" readonly="true"/>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Interes Generados</label>
+                        <input type="text" class="form-control" value="@Model.Intereses_Generados" name="prestamos.Intereses_Generados" id="Intereses_Generados" readonly="true"/>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Capital Pagado</label>
+                        <input type="text" class="form-control" value="@Model.Capital_Pagados" name="prestamos.Capital_Pagados" id="Capital_Pagados" readonly="true" />
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Interes Pagado</label>
+                        <input type="text" class="form-control" value="@Model.Intereses_Pagados" name="prestamos.Intereses_Pagados" id="Intereses_Pagados" readonly="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Balance General</label>
+                        <input type="text" class="form-control" value="@Model.Balance_General" name="prestamos.Balance_General" id="Balance_General" readonly="true" />
+
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Pago Extraordinario</label>
+                        <input type="text" class="form-control" value="@Model.Balance_General" name="PagoExtraordinario" id="PagoExtraordinario"  />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Plazo Sugerido</label>
+                        <input type="number" class="form-control" value="@Model.cuotas_restantes" name="prestamos.cuotas_restantes" id="cuotas_restantes">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                
+                <span id="spnModalConfigInformationResult" style="color:red;"></span>
+                        @if (@Model.Status_Desc != "Cancelado")
+{
+    <button type="button" class="btn btn-info" data-url="@(Url.Action("SetCuotaPaymentsExtra", "Pagos"))" onclick="PutPaymentsExtra(this,'spnModalConfigInformationResult' , '@Model.Prestamo_Id',$('#PagoExtraordinario').val(),  $('#cuotas_restantes').val());">Efectuar Pago</button>
+}
+            </div>
+        </div>
+
+    </div>
+
+</div>

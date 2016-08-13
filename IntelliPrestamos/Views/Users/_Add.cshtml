@@ -1,0 +1,179 @@
+﻿@model IntelliPrestamos.Models.Empleado
+
+                <div class="panel">
+                    <!--Block Styled Form -->
+                    <!--===================================================-->
+
+                    <div class="panel">
+
+                        <!-- Panel heading -->
+                        <div class="panel-heading">
+                            <div class="panel-control">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#demo-tabs-box-1" aria-expanded="true"><i class="fa"></i>Datos Empleado</a></li>
+                                    <li class=""><a data-toggle="tab" href="#demo-tabs-box-2" aria-expanded="false"><i class="fa"></i>Datos Del Usuario</a></li>
+                                </ul>
+                            </div>
+                            <h3 class="panel-title">Agregar / Modificar Empleados</h3>
+                        </div>
+
+                        <!-- Panel body -->
+                        @using (Html.BeginForm("Add", "Users", FormMethod.Get, new { enctype = "multipart/form-data", id = "AddForm" }))
+        {
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+
+                                <!--SHOWING ERRORS IN TOOLTIP-->
+                                <!--===================================================-->
+                                <div id="demo-tabs-box-1" class="tab-pane fade active in">
+                                    <h4 class="mar-btm text-thin">Datos Empleado</h4>
+                                    <hr>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nombre</label>
+                                                    <input type="text" class="form-control" value="@Model.Nombre" name="Nombre" id="Nombre">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Apellidos</label>
+                                                    <input type="text" class="form-control" value="@Model.Apellidos" name="Apellidos" id="Apellidos">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Cedula</label>
+                                                    <input type="text" class="form-control" value="@Model.Cedula" name="Cedula" id="Cedula" placeholder="999-9999999-9">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Direccion</label>
+                                                    <input type="text" class="form-control" value="@Model.Direccion" name="Direccion" id="Direccion">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Telefono</label>
+                                                    <input type="text" class="form-control telClass" value="@Model.Telefono" name="Telefono" id="Telefono">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Celular</label>
+                                                    <input type="text" class="form-control telClass" value="@Model.Celular" name="Celular" id="Celular">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Fecha Nacimiento</label>
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input type="text" class="form-control" value="@Model.Fecha_Nacimiento" name="Fecha_Nacimiento" id="Fecha_Nacimiento">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Fecha Ingreso</label>
+                                                    <div class="input-daterange input-group">
+                                                        <input type="text" class="form-control" value="@Model.Fecha_Ingreso" name="Fecha_Ingreso" id="Fecha_Ingreso">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Fecha Salida (LLenar este campo si el empleado no esta en la empresa)</label>
+                                                    
+                                                    <input type="text" class="form-control" value="@Model.Fecha_Salida" name="Fecha_Salida" id="Fecha_Salida">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Cargo</label>
+                                                    @Html.DropDownListFor(m => m.Cargo_Id, @ViewBag.DrpCargo as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Cargo_Id" })
+                                                </div>
+                                            </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Supervisor</label>
+                                                        @Html.DropDownListFor(m => m.Id_Supervisor, @ViewBag.DrpSup as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Id_Supervisor" })
+                                                    </div>
+                                                </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="demo-tabs-box-2" class="tab-pane fade">
+                                    <h4 class="mar-btm text-thin">Datos Del Usuario</h4>
+                                    <hr>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nombre Usuario</label>
+                                                    @Html.TextBoxFor(m => m.User.Usuario, new { @class = "form-control", @id = "Usuario"})
+                                                    @*<input type="text" class="form-control" value="@Model.User.Usuario" name="Usuario" id="Usuario">*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Clave</label>
+                                                    @Html.TextBoxFor(m => m.User.Clave, new { @class = "form-control", @id = "Clave"})
+                                                    @*<input type="number" class="form-control" value="@Model.User.Clave" name="Clave" id="Clave">*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Rol</label>
+                                                    @Html.DropDownListFor(m => m.User.Id_Rol, @ViewBag.DrpRol as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email</label>
+                                                    @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", @id = "Email", @name = "User.Email" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="panel-footer clearfix">
+                            <div class="panel-footer text-right">
+                                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                                @*<button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetAll", "Users"))" onclick="showRefreshViews(this, '_View');">Cerrar</button>*@
+                                <button type="submit" class="btn btn-primary" id="btnSaveModify">Guardar</button> @*onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Users"))">Guardar</button>*@
+                            </div>
+                        </div>
+        }
+                    </div>
+                    <!--===================================================-->
+                    <!--End Block Styled Form -->
+
+                </div>
+           
+

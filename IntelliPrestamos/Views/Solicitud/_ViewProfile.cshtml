@@ -1,0 +1,33 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Solicitud>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                @*<th style="width:4ex"></th>*@
+                <th>Solicitud ID</th>
+                <th>Cedula Solicitante</th>
+                <th>Nombre Solicitante</th>
+                <th>Apellidos Solicitante</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th>Fecha Creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id_Solicitud)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+                    <td>@Html.DisplayFor(modelItem => item.solicitante.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.solicitante.Apellidos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Monto_Prestamo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status_Desc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Creation_Date)</td>
+                   
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

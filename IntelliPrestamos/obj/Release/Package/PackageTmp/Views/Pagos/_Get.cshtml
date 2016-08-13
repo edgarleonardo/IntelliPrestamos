@@ -1,0 +1,129 @@
+﻿
+@model IEnumerable<IntelliPrestamos.Models.CuotaPagoViewModel>
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Relación Pagos / Cuotas En Sistema</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <!-- Foo Table - Expand / Collapse All Rows -->
+                    <!--===================================================-->
+                    <div class="panel-body">
+                        
+                        <table id="Cuotas_Table" class="table toggle-circle">
+                            <thead>
+                                <tr>
+                                    <th data-toggle="true"># Cuota</th>
+                                    <th>Fecha Cuota</th>
+                                    <th>Status</th>
+                                    <th >Fecha Pago</th>
+                                    <th>Mora</th>
+                                    <th>Cobrar Mora</th>
+                                    <th>Monto Pago</th>
+                                    <th>Monto Adeuda</th>
+                                    <th>Comprobante</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.cuota.Numero_Cuota</td>
+                                        <td>@item.cuota.Fecha_Cuota</td>
+                                        <td><span style="width: 200px;" class="label label-table label-@switch (item.cuota.Status_Desc.ToString())
+                                                                                {
+                                                                                    case "Pagada":
+                                                                                        @("success".ToString());
+                                                                                        break;
+                                                                                    case "Atrasada":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    case "Pendiente":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    case "Activa":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    default:
+                                                                                        @("dark".ToString());
+                                                                                        break;
+                                                                                }">@item.cuota.Status_Desc</span></td>
+                                        <td>@if (item.pago != null)
+                                            {
+                                                @item.pago.Fecha_Pago
+                                            }
+                                        </td>
+                                        <td>
+                                            <span id="Pay@(item.cuota.Numero_Cuota)">
+                                                @if (item.mora != null)
+                                                {
+                                                    @item.mora.Monto
+                                                }
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (item.mora != null)
+                                            {
+                                                @item.mora.Status_Desc
+                                            }
+                                        </td>
+                                        <td>@if (item.pago != null)
+                                            {
+                                                @item.pago.Monto
+                                            }
+                                            </td>
+                                        <td>@if (item.pago != null)
+                                            {
+                                                @(item.pago.Monto - item.cuota.Monto)
+                                            }
+                                            else
+                                            {
+                                                 @((-1)*item.cuota.Monto)
+                                            }</td>
+                                        <td>
+                                            @if (item.pago != null && item.cuota.Status_Desc.ToString() == "Pagada" )
+                                            {
+                                                <a href="@Url.Action("DownloadHtmlReports", "Documentos", new { @Action = "VolantePagos", @Url = Url.Action("VolantesDePago", "Pagos", new { @prestamo_id = item.cuota.Prestamos_Id, @numero_cuota = item.cuota.Numero_Cuota, pago_id = 0 }) })" class="list-group-item">Descargar</a>
+                                            }
+                                    </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--===================================================-->
+                    <!-- End Foo Table - Expand / Collapse All Rows -->
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#Cuotas_Table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

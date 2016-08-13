@@ -1,0 +1,262 @@
+﻿@model IntelliPrestamos.Models.Datos_Sistema
+@{
+    ViewBag.Title = "Datos Del Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <!--Block Styled Form -->
+    <!--===================================================-->
+    
+        <div class="panel">
+					
+								<!-- Panel heading -->
+								<div class="panel-heading">
+									<div class="panel-control">
+										<ul class="nav nav-tabs">
+											<li class="active"><a data-toggle="tab" href="#demo-tabs-box-1" aria-expanded="true"><i class="fa"></i>Generales</a></li>
+											<li class=""><a data-toggle="tab" href="#demo-tabs-box-2" aria-expanded="false"><i class="fa"></i>Mail</a></li>
+											<li class=""><a data-toggle="tab" href="#demo-tabs-box-3" aria-expanded="false"><i class="fa"></i>FTP</a></li>
+										</ul>
+									</div>
+									<h3 class="panel-title">Datos De La Empresa</h3>
+								</div>
+					
+								<!-- Panel body -->
+								@using (Html.BeginForm("Index", "SetUp", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormDataInfo" }))
+{
+                                    
+									<div class="panel-body">
+										<div class="tab-content">
+					
+											<!--SHOWING ERRORS IN TOOLTIP-->
+											<!--===================================================-->
+											<div id="demo-tabs-box-1" class="tab-pane fade active in">
+												<h4 class="mar-btm text-thin">Generales</h4>
+												<hr>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Nombre Negocio</label>
+                                                                <input type="text" class="form-control" value="@Model.Nombre_Negocio" name="Nombre_Negocio" id="Nombre_Negocio">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Dirección</label>
+                                                                <input type="text" class="form-control" value="@Model.Direccion" name="Direccion" id="Direccion">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Días De Gracia Prestamos</label>
+                                                                <input type="number" class="form-control" value="@Model.Dias_Gracia_Mora" name="Dias_Gracia_Mora" id="Dias_Gracia_Mora">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">% Moras</label>
+                                                                <input type="text" class="form-control" value="@Model.Porc_Mora" name="Porc_Mora" data-bv-field="numeric" id="Porc_Mora">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Monto Minimo Gastos Legales</label>
+                                                                <input type="number" class="form-control" value="@Model.gasto_cierre_MIN" name="gasto_cierre_MIN" id="gasto_cierre_MIN">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Gastos Referencia Minima</label>
+                                                                <input type="text" class="form-control" value="@Model.gasto_cierre_referencia_min" name="gasto_cierre_referencia_min" id="gasto_cierre_referencia_min">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">% Gastos Legales Mayor Minimo</label>
+                                                                <input type="text" class="form-control" value="@Model.porc_gastos_cierre_max" name="porc_gastos_cierre_max" data-bv-field="numeric" id="porc_gastos_cierre_max">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Cargar Logo Empresa</label>
+                                                                <input name="fileUpload" type="file" id="DataElementUpload" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                @if (Model.File_Name != null && Model.File_Name.Trim() != "")
+                                                                {
+                                                                    <img src="@Url.Content(Model.File_Name)" style="max-width: 50px;max-height:50px;" />
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Icon</label>
+                                                                <input name="fileUploadIcon" type="file" id="DataElementUploadIcon" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                @if (Model.Icon_file != null && Model.Icon_file.Trim() != "")
+                                                                {
+                                                                    <img src="@Url.Content(Model.Icon_file)" style="max-width: 50px;max-height:50px;" />
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label" >Escoger Tema</label>
+                                                                @Html.DropDownListFor(m => m.Color, @ViewBag.DrpColor as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Color" })                                                                
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+											</div>
+											<div id="demo-tabs-box-2" class="tab-pane fade">
+												<h4 class="mar-btm text-thin">Mail</h4>
+												<hr>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">SMTP Server</label>
+                                                                <input type="text" class="form-control" value="@Model.Smtp_Server" name="Smtp_Server" id="Smtp_Server">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">SMTP Puerto</label>
+                                                                <input type="number" class="form-control" value="@Model.Smtp_Port" name="Smtp_Port" id="Smtp_Port">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">SMTP User</label>
+                                                                <input type="text" class="form-control" value="@Model.Smtp_User" name="Smtp_User" id="Smtp_User">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">SMTP Password</label>
+                                                                <input type="text" class="form-control" value="@Model.Smtp_Pass" name="Smtp_Pass" id="Smtp_Pass">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">SMTP Time Out</label>
+                                                                <input type="number" class="form-control" value="@Model.Smtp_Timeout" name="Smtp_Timeout" id="Smtp_Timeout">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+											<!--===================================================-->
+											<div id="demo-tabs-box-3" class="tab-pane fade">
+												<h4 class="mar-btm text-thin">FTP</h4>
+												<hr>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP Server</label>
+                                                                <input type="text" class="form-control" value="@Model.Ftp_Server" name="Ftp_Server" id="Ftp_Server">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP Puerto</label>
+                                                                <input type="number" class="form-control" value="@Model.Ftp_Port" name="Ftp_Port" id="Ftp_Port">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP User</label>
+                                                                <input type="text" class="form-control" value="@Model.Ftp_User_Name" name="Ftp_User_Name" id="Ftp_User_Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP Password</label>
+                                                                <input type="text" class="form-control" value="@Model.Ftp_Pass" name="Ftp_Pass" id="Ftp_Pass">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP Root</label>
+                                                                <input type="text" class="form-control" value="@Model.Ftp_Root" name="Ftp_Root" id="Ftp_Root">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">FTP Habilitar</label>
+                                                                @Html.DropDownListFor(m => m.Ftp_Enable,
+                                                  new List<SelectListItem> {
+                                                       new SelectListItem { Value = "0" , Text = "No" },
+                                                       new SelectListItem { Value = "1" , Text = "Sí" }
+                                                    },
+new { @class = "form-control", @id = "Ftp_Enable" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+											<!--===================================================-->
+					
+										</div>
+									</div>
+									<div class="panel-footer clearfix">
+                                        <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                                        <div class="panel-footer text-right">
+                                            <button type="submit" class="btn btn-info">Actualizar</button>
+                                        </div>
+									</div>
+								}
+							</div>
+    <!--===================================================-->
+    <!--End Block Styled Form -->
+
+</div>
+
+@section scripts{
+<script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+<script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+   
+}

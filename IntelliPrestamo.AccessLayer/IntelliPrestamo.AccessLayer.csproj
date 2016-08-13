@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40CE2C2A-9043-4EC4-A79A-7770CF1DA7D0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntelliPrestamo.AccessLayer</RootNamespace>
+    <AssemblyName>IntelliPrestamo.AccessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="wnvhtmlconvert">
+      <HintPath>..\..\..\..\Leito\WebApplicationReportMetricsSVN\WebApplicationReportMetrics\bin\wnvhtmlconvert.dll</HintPath>
+    </Reference>
+    <Reference Include="wnvhtmltopdf">
+      <HintPath>..\..\..\..\Leito\WebApplicationReportMetricsSVN\WebApplicationReportMetrics\bin\wnvhtmltopdf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppTools\ExcelFileCreation.cs" />
+    <Compile Include="AppTools\MailSender.cs" />
+    <Compile Include="AppTools\PDFConverter.cs" />
+    <Compile Include="DataManager\BancosManager.cs" />
+    <Compile Include="DataManager\BaseManager.cs" />
+    <Compile Include="DataManager\CargoManager.cs" />
+    <Compile Include="DataManager\ColorManager.cs" />
+    <Compile Include="DataManager\CuotasManager.cs" />
+    <Compile Include="DataManager\DocumentManager.cs" />
+    <Compile Include="DataManager\EmpleadoManager.cs" />
+    <Compile Include="DataManager\FlujoManager.cs" />
+    <Compile Include="DataManager\FuenteIngresoManager.cs" />
+    <Compile Include="DataManager\InversionDetalleManager.cs" />
+    <Compile Include="DataManager\InversionManager.cs" />
+    <Compile Include="DataManager\ModuloManager.cs" />
+    <Compile Include="DataManager\MoraManager.cs" />
+    <Compile Include="DataManager\PagoManager.cs" />
+    <Compile Include="DataManager\PeriodicidadManager.cs" />
+    <Compile Include="DataManager\PrestamosManager.cs" />
+    <Compile Include="DataManager\ReferenciasManager.cs" />
+    <Compile Include="DataManager\ReferenciasTipoManager.cs" />
+    <Compile Include="DataManager\ReportesManager.cs" />
+    <Compile Include="DataManager\RolesManager.cs" />
+    <Compile Include="DataManager\SetUpManager.cs" />
+    <Compile Include="DataManager\SolicitanteManager.cs" />
+    <Compile Include="DataManager\SolicitudManager.cs" />
+    <Compile Include="DataManager\StatusManager.cs" />
+    <Compile Include="DataManager\SystemVariableManager.cs" />
+    <Compile Include="DataManager\TablaAmortizacionManager.cs" />
+    <Compile Include="DataManager\TransactionManager.cs" />
+    <Compile Include="DataManager\UsuarioManager.cs" />
+    <Compile Include="DbContexts\IntelliDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntelliPrestamos.Models\IntelliPrestamos.Models.csproj">
+      <Project>{dbd2ac94-09ff-4ec5-8d40-9b9f114747b1}</Project>
+      <Name>IntelliPrestamos.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

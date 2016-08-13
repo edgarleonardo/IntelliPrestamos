@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LayaoutReportsPdf</title>
+
+    <link type="image/x-icon" href="@Url.Content(ViewBag.Url_Icon)" rel="SHORTCUT ICON" />
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/nifty.min.css")" rel="stylesheet">
+
+
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/switchery/switchery.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css")" rel="stylesheet">
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/chosen/chosen.min.css")" rel="stylesheet">
+
+
+
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.css")" rel="stylesheet">
+
+
+    <!--Dropzone [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/dropzone/dropzone.css")" rel="stylesheet">
+
+
+    <!--Summernote [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/summernote/summernote.min.css")" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="@Url.Content("~/Content/css/demo/nifty-demo.min.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/Content/css/themes/" + ViewBag.ColorLeft + ".min.css")" rel="stylesheet">
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/pace/pace.min.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Content/plugins/pace/pace.min.js")"></script>
+
+
+    @RenderSection("Header", false)
+    <!--jQuery [ REQUIRED ]-->
+    <script src="@Url.Content("~/Content/js/jquery-2.1.1.min.js")"></script>
+</head>
+<body>
+    <div> 
+        @RenderBody()
+    </div>
+</body>
+</html>

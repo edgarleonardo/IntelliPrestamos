@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.CuotaPagoViewModel>
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 885px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ejecución Pagos a Cuotas y Pagos Extraordinarios En Sistema</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            <!--Panel heading-->
+                            <div class="panel-heading">
+                                <div class="panel-control">
+                                    <!--Nav tabs-->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#demo-tabs-box-1">Pagos Cuotas</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#demo-tabs-box-2">Pagos Extraordinarios</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="panel-title">Escoger Acción</h3>
+                            </div>
+                            <!--Panel body-->
+                            <div class="panel-body">
+
+                                <!--Tabs content-->
+                                <div class="tab-content">
+                                    <div id="demo-tabs-box-1" class="tab-pane fade in active" style="overflow: overlay;">
+                                        <h4 class="text-thin">Pagos Cuotas</h4>
+                                        <p>Llenar el campo del monto y guardar la información</p>
+                                        @Html.Partial("~/Views/Pagos/_ViewCuotasPendientes.cshtml", Model)
+                                    </div>
+                                    <div id="demo-tabs-box-2" class="tab-pane fade">
+                                        <h4 class="text-thin">Pagos Extraordinarios</h4>
+                                        <p>Efectuar Pagos Extraordinarios.</p>
+                                        @if (ViewBag.Prestamos != null )
+                                        {
+                                            @Html.Partial("~/Views/Pagos/_PagosExtraordinarios.cshtml", (ViewBag.Prestamos as IntelliPrestamos.Models.Prestamos))
+                                        }
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

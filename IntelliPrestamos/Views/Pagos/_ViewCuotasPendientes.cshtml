@@ -1,0 +1,127 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.CuotaPagoViewModel>
+
+
+                        <table id="Cuotas_Table" class="table toggle-circle">
+                            <thead>
+                                <tr>
+                                    <th data-toggle="true"># Cuota</th>
+                                    <th>Fecha Cuota</th>
+                                    <th>Status</th>
+                                    <th>Mora</th>
+                                    <th>Cobrar Mora</th>
+                                    <th>Monto Cuota</th>
+                                    <th>Monto Pagado</th>
+                                    <th>Monto Pendiente</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.cuota.Status_Desc.ToString() != "Pagada")
+                                    { 
+                                    <tr id="row_table@(item.cuota.Numero_Cuota)">
+                                        <td>@item.cuota.Numero_Cuota</td>
+                                        <td>@item.cuota.Fecha_Cuota</td>
+                                        <td>
+                                            <span style="width: 200px;" class="label label-table label-@switch (item.cuota.Status_Desc.ToString())
+                                                                                {
+                                                                                    case "Pagada":
+                                                                                        @("success".ToString());
+                                                                                        break;
+                                                                                    case "Atrasada":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    case "Pendiente":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    case "Activa":
+                                                                                        @("danger".ToString());
+                                                                                        break;
+                                                                                    default:
+                                                                                        @("dark".ToString());
+                                                                                        break;
+                                                                                }">@item.cuota.Status_Desc</span>
+                                                                            </td>
+                                        <td><span id="Mora@(item.cuota.Numero_Cuota)">
+    @if (item.mora != null)
+    {
+        @item.mora.Monto
+    }
+</span></td>                                        
+                                        <td>
+                                            @if (item.mora != null && item.mora.Monto != null && item.mora.Monto > 0)
+                                            {
+                                                                                    if (item.mora.Status_Desc != "Pagada" && item.mora.Status_Desc != "Desestimar")
+                                                                                    {
+                                                                                        @Html.DropDownList("CobrarMora" + item.cuota.Numero_Cuota.ToString(),
+                                                                                              new List<SelectListItem> {
+                                                                                                   new SelectListItem { Value = "15" , Text = "Desestimar" },
+                                                                                                   new SelectListItem { Value = "13" , Text = "Cobrar" }
+                                                                                                },
+                                                                                                  new { @class = "form-control", @id = "CobrarMora" + item.cuota.Numero_Cuota.ToString() })
+                                                                                        <script type="text/javascript">setOnChangeEvent(@item.cuota.Numero_Cuota);</script>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        @item.mora.Status_Desc
+                                                                                    }
+                                                <input type="hidden" value="@(item.mora.Status_Id)" id="Seleccion@(item.cuota.Numero_Cuota)">
+                                                
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" value="0" id="Seleccion@(item.cuota.Numero_Cuota)">
+                                            }
+                                                
+                                        </td>
+                                        <td>@item.cuota.Monto</td>
+                                                                    <td>
+                                                                        <span id="Pay@(item.cuota.Numero_Cuota)">
+                                                                            @if (item.pago != null)
+                                                                            {
+                                                                                @item.pago.Monto
+                                                                            }
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        @if (item.pago != null)
+                                                                        {
+                                                                            <input type="text" class="form-control" value="@(item.cuota.Monto - item.pago.Monto)" name="Pago_Cuota_Monto@(item.cuota.Numero_Cuota)" id="Pago_Cuota_Monto@(item.cuota.Numero_Cuota)" style="width: 115px;">
+                                                                            <input type="hidden" value="@(item.pago.Monto)" id="Hidden@(item.cuota.Numero_Cuota)">
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <input type="text" class="form-control" value="@(item.cuota.Monto)" name="Pago_Cuota_Monto@(item.cuota.Numero_Cuota)" id="Pago_Cuota_Monto@(item.cuota.Numero_Cuota)" style="width: 115px;">
+                                                                            <input type="hidden" value="0" id="Hidden@(item.cuota.Numero_Cuota)">
+                                                                        }
+                                                                </td>
+                                                            <td><a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="PutPayments(this,'spnModalConfigInformation','row_table@(item.cuota.Numero_Cuota)',@item.cuota.Prestamos_Id,@item.cuota.Numero_Cuota ,@item.cuota.Monto, $('#Pago_Cuota_Monto@(item.cuota.Numero_Cuota)').val(), $('#Hidden@(item.cuota.Numero_Cuota)').val(), $('#Mora@(item.cuota.Numero_Cuota)').val(), $('#Seleccion@(item.cuota.Numero_Cuota)').val() );" data-original-title="pagar" data-container="body" title="Efectuar Pago" data-url="@(Url.Action("setcuotapayments", "Pagos" ))"><span id="demo-sw-checkstate-field" class="label label-info">Pagar</span>@*<i class="fa fa-magic"></i>*@</a></td>
+</tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    
+
+<script type="text/javascript">
+   
+    $(function () {
+        $('#Cuotas_Table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

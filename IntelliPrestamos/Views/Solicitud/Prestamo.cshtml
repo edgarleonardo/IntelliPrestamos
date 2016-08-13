@@ -1,0 +1,178 @@
+﻿@model IntelliPrestamos.Models.Solicitud
+@{
+    ViewBag.Title = "Prestamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+   
+    <div class="panel-heading">        
+        <h3 class="panel-title">No. Solicitud @Model.Id_Solicitud</h3>
+    </div>
+        <div class="panel-body">
+            <h4 class="mar-btm text-thin">Solicitud</h4>
+            <hr>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Plazo Prestamo</label>
+                            <input type="number" class="form-control" value="@Model.Plazo" name="Plazo" id="Plazo" readonly="true">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Monto Solicitado</label>
+                            <input type="text" class="form-control" value="@Model.Monto_Prestamo" name="Monto_Prestamo" id="Monto_Prestamo" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Periodicidad</label>
+                            @Html.DropDownListFor(m => m.Periodicidad_Id, @ViewBag.GetDrpPeriodicidad as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Cargo_Id", @readonly="true" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Ingresos Solicitante</label>
+                            <input type="text" class="form-control" value="@Model.Ingresos_Solicitante" name="Ingresos_Solicitante" id="Ingresos_Solicitante" readonly="true">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Tasa Interes</label>
+                            <input type="text" class="form-control" value="@Model.Interes" name="Interes" id="Interes" readonly="true">
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Comentario</label>
+                            @Html.TextAreaFor(m => m.Comentario, new { @class = "form-control", @id = "Comentario", @readonly = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Cobrador</label>
+                            @Html.DropDownListFor(m => m.Cobrador, @ViewBag.DrpSup as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Cobrador" })
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Comentario Revision Aprobacion</label>
+                            <span class="control-label" style="font-weight:bold;">@Model.Comentario_Credito</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Dia Pago</label>
+                            <input type="number" class="form-control" value="@Model.Dia_Pago" name="Dia_Pago" id="Dia_Pago" readonly="true">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Banco</label>
+                            @Html.DropDownListFor(m => m.Id_Banco, @ViewBag.GetDrpBanco as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Id_Banco", @readonly="true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Usuario Int Banking</label>
+                            <input type="text" class="form-control" value="@Model.Usuario_Int_Banking" name="Usuario_Int_Banking" id="Usuario_Int_Banking" readonly="true">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Clave Int Banking</label>
+                            <input type="text" class="form-control" value="@Model.Clave_Int_Banking" name="Clave_Int_Banking" id="Clave_Int_Banking" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Solicitud Creada Por</label>
+                            <input type="text" class="form-control" value="@Model.Create_By" name="Create_By" id="Create_By" readonly="true">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Creación Solicitud</label>
+                            <input type="text" class="form-control" value="@Model.Creation_Date" name="Creation_Date" id="Creation_Date" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Solicitud Actualizada Por</label>
+                            <input type="text" class="form-control" value="@Model.Update_By" name="Update_By" id="Update_By" readonly="true">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Actualizada Solicitud</label>
+                            <input type="text" class="form-control" value="@Model.Update_Date" name="Update_Date" id="Update_Date" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Seleccionar Accionista</label>
+                            @Html.DropDownList("Accionista", @ViewBag.DrpAccionistas as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Accionista" , @readonly="true" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Monto Disponible Accionista</label>
+                            <input type="text" class="form-control" value=""  id="Monto_Accionista" name="Monto_Accionista" readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="content-ajax"></div>
+                <div class="panel-footer clearfix">
+                    <div class="panel-footer text-right">
+                        <input type="hidden" id="UrlDrpItems" name="UrlDrpItems" data-url="@(Url.Action("GetInvestmentAcc", "Solicitud"))" />
+                        <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                        <button type="button" class="btn btn-info" data-url="@(Url.Action("SetPrestamo", "Solicitud"))" onclick="create_loan(this, '@(Model.Id_Solicitud)','_Loan_Information' );">Crear Prestamo</button>
+                    </div>
+                </div>
+
+            </div>
+
+</div>
+
+
+    @section Header
+    {
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts
+{
+    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script type="text/javascript">        
+        GetInversorAmount($("#Accionista  :selected").val());
+    </script>
+}

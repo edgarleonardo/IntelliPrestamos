@@ -1,0 +1,106 @@
+﻿@model  IntelliPrestamos.Models.Inversion
+
+        @*<form id="AddConfigUpdate" action="@(Url.Action("Add", "Accionistas"))">*@
+@using (Html.BeginForm("Add", "Accionistas", FormMethod.Get, new { @class = "form-horizontal", @id="AddConfigUpdate", role = "form" }))
+{
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">@Model.Cedula</label>
+                    @Html.HiddenFor(m => m.Cedula, new { @id = "Cedula" })
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" style="font-weight:bold;">Monto:</label>
+                    <input type="number" class="form-control" value="0" name="Monto" id="Monto">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" style="font-weight:bold;">Tipo Transaccion:</label>
+                    @Html.DropDownList("Tipo_Trans", ViewBag.DrpTipoTrans as IEnumerable<SelectListItem>
+                                                                , new { @class = "form-control", @id = "Tipo_Trans" })
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" style="font-weight:bold;">Comentario:</label>
+                        <textarea class="form-control" name="Comentario" id="Comentario">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <span id="spnModalConfigInformation" style="color:red;"></span>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='@Url.Action("Manage", "Accionistas")'">Volver</button>
+        <button type="submit" class="btn btn-primary" id="btnSaveModify">Guardar</button>
+    </div>
+}
+@*</form>*@
+    
+   
+    <div class="table-responsive">
+        <table class="tblDataTble table table-striped table-hover">
+            <thead>
+                <tr>
+
+                    <th>Tipo Transaccion</th>
+                    <th>Monto</th>
+                    <th>Comentario</th>
+                    <th>Fecha Creacion</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Inv_Detalle != null && Model.Inv_Detalle.Count > 0)
+                {
+                    foreach (var item in Model.Inv_Detalle)
+                    {
+                        <tr>
+
+                            <td>@Html.DisplayFor(modelItem => item.Tipo_Transaccion_Desc)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Monto)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Comentario)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Fecha_Transaccion)</td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.tblDataTble').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                    "zeroRecords": "No se encontraron coincidencias",
+                    "info": "Mostrando Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "",
+                    "search": "Buscar:",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+
+
+

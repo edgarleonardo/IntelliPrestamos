@@ -1,0 +1,16 @@
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\IntelliPrestamo.AccessLayer.dll.config
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\IntelliPrestamo.AccessLayer.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\IntelliPrestamo.AccessLayer.pdb
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\EntityFramework.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\IntelliPrestamos.Models.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\wnvhtmlconvert.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\wnvhtmltopdf.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\IntelliPrestamos.Models.pdb
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\EntityFramework.xml
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\wnvhtmltopdf.xml
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Release\wnvinternal.dat
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Release\IntelliPrestamo.AccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Release\IntelliPrestamo.AccessLayer.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Release\IntelliPrestamo.AccessLayer.pdb

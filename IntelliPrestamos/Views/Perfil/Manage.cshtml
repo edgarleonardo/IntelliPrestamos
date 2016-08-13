@@ -1,0 +1,340 @@
+﻿@model IntelliPrestamos.Models.PerfilViewModel
+@{
+    ViewBag.Title = "Perfil En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo muestra el perfil del usuario en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Perfil En Sistema</h3>
+    </div>
+    @if (Model.empleado != null)
+    {
+         <div class="panel-body">
+        <div id="page-content">
+            <!--Profile Widget-->
+            <!--===================================================-->
+            <div class="panel widget">
+                <div class="widget-header bg-primary"></div>
+                <div class="widget-body text-center">
+                    <img alt="Profile Picture" class="widget-img img-circle img-border-light"
+                         src="@Url.Content("~/img/av2.png")">
+                    <h4 class="mar-no">@Model.empleado.Nombre @Model.empleado.Apellidos</h4>
+                    <p class="text-muted mar-btm">@Model.empleado.Cargo_Desc</p>
+@if (Model.inversiones != null)
+{
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <h3 class="panel-title">Resumen Inversión En Sistema</h3>
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            <div class="row">
+
+                <!--Tile with progress bar - (Visit Today)-->
+                <!--===================================================-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="panel panel-success panel-colorful">
+                        <div class="pad-all media">
+                            <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs">
+                                    <i class="fa fa-dashboard fa-2x"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <p class="h3 text-thin media-heading">@Model.inversiones.Monto_Inversion_Actual.ToString("0,0.000")</p>
+                                <small class="text-uppercase">Inversión</small>
+                            </div>
+                        </div>
+                        <div class="progress progress-xs progress-dark-base mar-no">
+                            <div style="width: @((Model.inversiones.Monto_Inversion_Actual/((Model.inversiones.Monto_Prestados > 0)?Model.inversiones.Monto_Prestados : (1)))*100).ToString("0,0.000")%" class="progress-bar progress-bar-light" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar"></div>
+                        </div>
+                        <div class="pad-all text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <!--===================================================-->
+                <!--End Tile with progress bar - (Visit Today)-->
+                <!--Tile with progress bar - (Comments)-->
+                <!--===================================================-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="panel panel-mint panel-colorful">
+                        <div class="pad-all media">
+                            <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs">
+                                    <i class="fa fa-shopping-cart fa-2x"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <p class="h3 text-thin media-heading">@Model.inversiones.Monto_Prestados.ToString("0,0.000")</p>
+                                <small class="text-uppercase">Monto Prestado</small>
+                            </div>
+                        </div>
+                        <div class="progress progress-xs progress-dark-base mar-no">
+
+                        </div>
+                        <div class="pad-all text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <!--===================================================-->
+                <!--End Tile with progress bar - (Comments)-->
+                <!--Tile with progress bar - (New Order)-->
+                <!--===================================================-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="panel panel-purple panel-colorful">
+                        <div class="pad-all media">
+                            <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs">
+                                    <i class="fa fa-line-chart fa-fw fa-2x"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <p class="h3 text-thin media-heading">@Model.inversiones.Monto_Balance.ToString("0,0.000")</p>
+                                <small class="text-uppercase">Balance Actual Disponible</small>
+                            </div>
+                        </div>
+                        <div class="progress progress-xs progress-dark-base mar-no">
+                            <div style="width: @((Model.inversiones.Monto_Inversion_Actual / ((Model.inversiones.Monto_Balance > 0) ? Model.inversiones.Monto_Balance : (1))) * 100)%" class="progress-bar progress-bar-light" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar"></div>
+                        </div>
+                        <div class="pad-all text-right">
+
+                        </div>
+                    </div>
+                </div>
+                <!--===================================================-->
+                <!--End Tile with progress bar - (New Order)-->
+                <!--Tile with progress bar - (Earning)-->
+                <!--===================================================-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="panel panel-pink panel-colorful">
+                        <div class="pad-all media">
+                            <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs">
+                                    <i class="fa fa-dollar fa-fw fa-2x"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <p class="h3 text-thin media-heading">@Model.inversiones.Monto_Ganancia.ToString("0,0.000")</p>
+                                <small class="text-uppercase">Ganancias</small>
+                            </div>
+                        </div>
+                        <div class="progress progress-xs progress-dark-base mar-no">
+                            @*<div style="width: 37.4%" class="progress-bar progress-bar-light" aria-valuemax="100" aria-valuemin="0" aria-valuenow="37.4" role="progressbar"></div>*@
+                        </div>
+                        <div class="pad-all text-right">
+                            @*<small><span class="text-semibold"><i class="fa fa-dollar fa-fw"></i> 22,675</span> Total Earning</small>*@
+                        </div>
+                    </div>
+                </div>
+                <!--===================================================-->
+                <!--End Tile with progress bar - (Earning)-->
+
+            </div>
+        </div>
+    </div>
+}           
+     </div>
+            </div>
+            <form action="@Url.Action("Manage", "Perfil")">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Fecha Inicio</label>
+                <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="form-control" value="" name="FechaInicio" id="FechaInicio">
+                    <input type="hidden" class="form-control" value="@Model.empleado.Cedula" name="Cedula" >
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Fecha Fin</label>
+                <div class="input-daterange input-group">
+                    <input type="text" class="form-control" value="" name="FechaFin" id="FechaFin">
+                </div>
+            </div>
+        </div>
+    </div>
+                <div class="panel-footer clearfix">
+                    <div class="panel-footer text-right">
+                        <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                        <button type="submit" class="btn btn-info">Buscar</button>
+                    </div>
+                </div>
+</form>
+            <!--===================================================-->
+        </div>
+        </div>
+        if (Model.inversiones_detalles != null)
+        {
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <h3 class="panel-title">Detalle Inversión En Sistema</h3>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="content-ajax">
+                    <div class="table-responsive">
+                        <table class="tblDataTble table table-striped table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th>Tipo Transaccion</th>
+                                    <th>Monto</th>
+                                    <th>Comentario</th>
+                                    <th>Fecha Creacion</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach (var item in Model.inversiones_detalles)
+                                    {
+                                        <tr>
+
+                                            <td>@Html.DisplayFor(modelItem => item.Tipo_Transaccion_Desc)</td>
+                                            <td>
+                                                @item.Monto.ToString("0,0.000")
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Comentario)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Fecha_Transaccion)</td>
+
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        <div id="content-modal_info"></div>
+        if (Model.SolicitudPendiente != null)
+        {
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <h3 class="panel-title">Gestión Solicitudes Creadas En Sistema</h3>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="content-ajax">
+                    @Html.Partial("~/Views/Solicitud/_ViewProfile.cshtml", Model.SolicitudPendiente)
+                </div>
+            </div>
+        }
+       if (Model.SolicitudAprobadas != null)
+        {
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <h3 class="panel-title">Solicitudes Aprobadas En Sistema</h3>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="content-ajax">
+                    @Html.Partial("~/Views/Solicitud/_ViewProfile.cshtml", Model.SolicitudAprobadas)
+                </div>
+                
+            </div>
+        }       
+        
+        
+        if (Model.Prestamos != null)
+        {
+            <div class="panel-body">
+                <div class="pad-btm form-inline">
+                    <div class="row">
+                        <div class="col-sm-6 table-toolbar-left">
+                            <h3 class="panel-title">Prestamos Activos En Sistema</h3>
+                        </div>
+                        <div class="col-sm-6 table-toolbar-right">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="content-ajax">
+                    @Html.Partial("~/Views/Pagos/_ViewPrestamos.cshtml", Model.Prestamos)
+                </div>
+            </div>
+        }
+        
+    }
+    </div>
+   
+@section Header{
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+<script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+<script type="text/javascript">
+    $('#FechaInicio').datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    });
+    $('#FechaFin').datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    });
+    $(function () {
+        $('.table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>
+}

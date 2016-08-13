@@ -1,0 +1,103 @@
+﻿
+@model IntelliPrestamos.Models.Roles
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Inhabilitar Registro</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    @Html.HiddenFor(m => m.Id_Rol, new { @id = "Id_Rol" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Nombre Rol:</label>
+                                    @Html.TextBoxFor(m => m.Nombre_Rol, new { @class = "form-control", @id = "Nombre_Rol", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Descripcion:</label>
+                                        @Html.TextBoxFor(m => m.Descripccion, new { @class = "form-control", @id = "Descripccion", @readonly = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Esta Activo:</label>
+                                    @Html.DropDownListFor(m => m.Activo, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "Activo", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Modulos:</label>
+                                    @if (Model.ListRol != null)
+                                    {
+                                        for (int i = 0; i < Model.ListRol.Count; i++)
+                                        {
+                                            <div class="checkbox">
+                                                @Html.CheckBoxFor(m => m.ListRol[i].Selected, new {  @disabled = "true" })
+                                                @Model.ListRol[i].Nombre                                               
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetRoles", "SetUp"))" onclick="showRefreshViews(this, '_ViewRoles');">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Delete", "SetUp"))">Inhabilitar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

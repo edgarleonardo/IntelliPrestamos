@@ -1,0 +1,96 @@
+﻿@model IntelliPrestamos.Models.Transaction
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Crear/Editar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    @Html.HiddenFor(m => m.Tipo_Transaccion_Id, new { @id = "Tipo_Transaccion_Id" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Nombre:</label>
+                                    @Html.TextBoxFor(m => m.Tipo_Transaccion_Desc, new { @class = "form-control", @id = "Tipo_Transaccion_Desc" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Afecta Pago y Capital:</label>
+                                        @Html.DropDownListFor(m => m.Tipo_Pago_Capital, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "Tipo_Pago_Capital" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Tipo_Capital:</label>
+                                    @Html.DropDownListFor(m => m.Tipo_Capital, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "Tipo_Capital" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetAll", "Transaction"))" onclick="showRefreshViews(this, '_View');">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Transaction"))">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        // validate the contact form when it is submitted
+        $("#AddConfigUpdate").validate({
+
+            rules: {
+                Nombre: { required: true }
+            },
+            messages: {
+                Nombre: "* Campo obligatorio"
+            }
+        });
+
+    });
+
+</script>

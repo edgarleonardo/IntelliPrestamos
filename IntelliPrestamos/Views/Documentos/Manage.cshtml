@@ -1,0 +1,49 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Document>
+@{
+    ViewBag.Title = "Gestión De Documentos En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo muestra los Modulos de seguridad configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Gestión De Documentos En Sistema</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" data-url="@(Url.Action("Get", "Documentos"))" onclick="showModalConfig(this, '0','_Add');">Crear</button>
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Documentos/_View.cshtml", Model)
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/summernote/summernote.min.js")"></script>
+
+}
+
+
+
+
+

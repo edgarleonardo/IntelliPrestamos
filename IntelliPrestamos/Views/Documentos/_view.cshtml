@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Document>
+<div class="table-responsive">
+    <table class="table table-striped table-hover" id="ViewTableInfo">
+        <thead>
+            <tr>
+                <th style="width:4ex"></th>
+                <th>Flujo</th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th class="text-right">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a onclick="showModalConfig(this,  '@(item.Id)', '_Get');" style="cursor: pointer; color: #337ab7;" data-url="@(Url.Action("Get", "Documentos"))">Visualizar</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Flujo_desc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre_Documento)</td>
+                    <td>
+                        @if (item.Activo != null && item.Activo == 1)
+                        {
+                            <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.Id)','_Add');" data-original-title="Editar" data-container="body" data-url="@(Url.Action("Get", "Documentos"))"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this,  '@(item.Id)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "Documentos"))"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#ViewTableInfo').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

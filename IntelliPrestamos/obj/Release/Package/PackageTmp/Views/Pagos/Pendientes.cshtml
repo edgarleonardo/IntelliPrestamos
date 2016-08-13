@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Prestamos>
+@{
+    ViewBag.Title = "Gestión Pagos Prestamos En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo maneja los pagos a prestamos configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Pagos Pendientes</h3>
+    </div>
+
+    <div class="panel-body">
+
+        @*<div class="col-sm-6 table-toolbar-left">
+            <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" data-url="@(Url.Action("Notificaciones", "Pagos"))" onclick="showModalConfig(this, '0','_Add');">Enviar Notificación</button>
+        </div>*@
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" data-url="@(Url.Action("Notificaciones", "Pagos"))" onclick="showModalConfig(this, '0','_Add');">Enviar Notificación</button>
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model != null && Model.Count() > 0)
+        {
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Pagos/_ViewPendientes.cshtml", Model)
+        </div>    
+        }
+        
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/plugins/fooTable/css/footable.core.css")" rel="stylesheet">
+}
+@section scripts{
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+    <script type="text/javascript">
+        $('#Cedula').mask('999-9999999-9');
+        function setOnChangeEvent(numero_cuota) {
+            var stringId = String(numero_cuota);
+            $(function () {
+                $("#CobrarMora" + stringId).change(function () {
+                    $("#Seleccion" + stringId).val($(this).val());
+                });
+            });
+        }
+    </script>
+}

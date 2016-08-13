@@ -1,0 +1,43 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Empleado>
+@{
+    ViewBag.Title = "Gestion De Empleados y Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo muestra los Modulos de seguridad configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Gestión De Empleados y Usuarios En Sistema</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" onclick="window.open('@Url.Action("User", "Users", new { Cedula = "0" })','_blank');">Crear</button>
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Users/_View.cshtml", Model)
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+}
+
+
+
+

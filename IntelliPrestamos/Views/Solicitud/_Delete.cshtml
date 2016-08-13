@@ -1,0 +1,56 @@
+﻿
+@model IntelliPrestamos.Models.Solicitud
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    @Html.HiddenFor(m => m.Id_Solicitud, new { @id = "Id_Solicitud" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Monto Solicitado:</label>
+                                    @Html.TextBoxFor(m => m.Monto_Prestamo, new { @class = "form-control", @id = "Monto_Prestamo", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Ingresos Solicitante:</label>
+                                        @Html.TextBoxFor(m => m.Ingresos_Solicitante, new { @class = "form-control", @id = "Ingresos_Solicitante", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetAll", "Solicitud"))" onclick="showRefreshViews(this, '_View');">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="delModalConfigParam(this, 'spnModalConfigInformation', @Model.Id_Solicitud);" data-url="@(Url.Action("Delete", "Solicitud"))">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

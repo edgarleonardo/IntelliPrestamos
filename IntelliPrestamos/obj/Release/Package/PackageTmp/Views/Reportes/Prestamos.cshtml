@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Prestamos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo maneja los pagos a prestamos configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Prestamos</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <hr>
+        <form id="AddConfigUpdate">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Cedula</label>
+                            <input type="text" class="form-control" value="" name="Cedula" id="Cedula" placeholder="999-9999999-9">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Prestamo Id</label>
+                            <input type="text" class="form-control" value="" name="Prestamo_Id" id="Prestamo_Id">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Accionista</label>
+                            <input type="text" class="form-control" value="" name="Accionista" id="Accionista" placeholder="999-9999999-9">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @*<label class="control-label">Seleccionar Accionista</label>
+                                @Html.DropDownList("Accionista", @ViewBag.DrpAccionistas as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Accionista" })*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Inicio</label>
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class="form-control" value="" name="FechaInicio" id="FechaInicio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Fin</label>
+                            <div class="input-daterange input-group">
+                                <input type="text" class="form-control" value="" name="FechaFin" id="FechaFin">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                <button type="button" class="btn btn-info"
+                        onclick="showModalReportes(this, $('#Cedula').val(), $('#Prestamo_Id').val(), $('#Accionista').val(), $('#FechaInicio').val(), $('#FechaFin').val(), '_ViewPrestamos');"
+                        data-url="@(Url.Action("GetPrestamos", "Reportes"))">
+                    Consultar
+                </button>
+            </div>
+        </div>
+        <div id="content-ajax">
+
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/plugins/fooTable/css/footable.core.css")" rel="stylesheet">
+}
+@section scripts{
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+    <script type="text/javascript">
+        $('#Accionista').mask('999-9999999-9');
+        $('#Cedula').mask('999-9999999-9');
+        $('#FechaInicio').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#FechaFin').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+    </script>
+}
+
+
+
+
+

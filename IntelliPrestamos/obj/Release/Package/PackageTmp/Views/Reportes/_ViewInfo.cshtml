@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Reportes>
+<div class="table-responsive">
+    <table class="tblDataTble table table-striped table-hover">
+        <caption>
+            @if (ViewBag.DownloadLink != null)
+            {
+                <a href="../TmpFiles/@ViewBag.DownloadLink" class="btn btn-mint btn-rounded">Descargar Excel</a>
+            }
+        </caption>
+        <thead>
+            <tr>
+                <th>Tipo Transaccion</th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Accionista</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>Ganancias</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cedula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Accinista_Nombre)</td>
+                        <td>
+                            @item.Monto_Intereses.ToString("0,0.000")
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.tblDataTble').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

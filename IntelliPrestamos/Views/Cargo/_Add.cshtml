@@ -1,0 +1,102 @@
+﻿@model IntelliPrestamos.Models.Cargo
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Crear/Editar Cargo</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    @Html.HiddenFor(m => m.Id_Cargo, new { @id = "Id_Cargo" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Nombre:</label>
+                                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", @id = "Nombre" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Es Gerencial:</label>
+                                        @Html.DropDownListFor(m => m.EsGerencial, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "EsGerencial" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Es Accionista:</label>
+                                    @Html.DropDownListFor(m => m.EsAccionista, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "EsAccionista" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Activo:</label>
+                                        @Html.DropDownListFor(m => m.Activo, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Sí", Value = "1" },
+                                                                                new SelectListItem{ Text="No", Value = "0" }
+                                                                             }, new { @class = "form-control", @id = "Activo" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetAll", "Cargo"))" onclick="showRefreshViews(this, '_View');">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Cargo"))">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        // validate the contact form when it is submitted
+        $("#AddConfigUpdate").validate({
+
+            rules: {
+                Nombre: { required: true }
+            },
+            messages: {
+                Nombre: "* Campo obligatorio"
+            }
+        });
+
+    });
+
+</script>

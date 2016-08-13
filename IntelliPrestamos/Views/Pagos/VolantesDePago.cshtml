@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IntelliPrestamos.Models.Pagos>
+@{
+    ViewBag.Title = "VolantesDePago";
+    Layout = "~/Views/Shared/_LayaoutReportsPdf.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Comprobante de Pago</h3>
+    </div>
+
+    <!-- Striped Table -->
+    <!--===================================================-->
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th># Comprobante</th>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Pago Descripcion</th>
+                        <th>Fecha Pago</th>
+                        <th>Numero Cuota Pagada</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+@foreach (var item in Model)
+                {
+                    <tr>
+                        <td><span class="btn-link">#@(item.Pago_id)</span></td>
+                        <td>@item.Cedula</td>
+                        <td>@item.Nombre</td>
+                        <td>@if (item.Numero_Cuota == 0)
+                            {
+                                @("Pago Extraordinario")
+                            }
+                            else
+                            {
+                                @("Pago Cuota")
+                            }
+                        </td>
+                        <td>@item.Fecha_Pago</td>
+                        <td>@item.Numero_Cuota</td>
+                        <td>$@(item.Monto.ToString("0,0.000"))</td>
+                    </tr>
+}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!-- End Striped Table -->
+
+</div>
+

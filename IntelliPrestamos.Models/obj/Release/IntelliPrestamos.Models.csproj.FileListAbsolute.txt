@@ -1,0 +1,5 @@
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamos.Models\bin\Release\IntelliPrestamos.Models.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamos.Models\bin\Release\IntelliPrestamos.Models.pdb
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamos.Models\obj\Release\IntelliPrestamos.Models.csprojResolveAssemblyReference.cache
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamos.Models\obj\Release\IntelliPrestamos.Models.dll
+C:\Users\CARLOS\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamos.Models\obj\Release\IntelliPrestamos.Models.pdb

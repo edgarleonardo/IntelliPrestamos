@@ -1,0 +1,7 @@
+Id_Rol,Nombre_Rol,Descripccion,Activo
+1,Administrador,Administrador Del Sistema,1
+2,Administrador,Administrador Del Sistema,1
+3,Analista De Credito,Analista De Credito,1
+4,Analista Servico Cliente,Analista Servico Cliente,1
+5,Secretaria,SecretariaDel Sistema,1
+6,Cobrador,Administrador Del Sistema,1

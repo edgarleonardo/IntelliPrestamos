@@ -1,0 +1,88 @@
+﻿
+@model IntelliPrestamos.Models.Prestamos
+@{
+    ViewBag.Title = "Gestión Pagos Prestamos En Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo maneja los pagos a prestamos configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Gestión Pagos Prestamos</h3>
+    </div>
+
+    <div class="panel-body">
+       
+            <hr>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Cedula</label>
+                            <input type="text" class="form-control" value="@Model.Cedula" name="Cedula" id="Cedula" placeholder="999-9999999-9">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Prestamo Id</label>
+                            <input type="text" class="form-control" value="@Model.Prestamo_Id" name="Prestamo_Id" id="Prestamo_Id">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Solicitud Id</label>
+                            <input type="text" class="form-control" value="@Model.Id_Solicitud" name="Solicitud_Id" id="Solicitud_Id">
+                             
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @*<label class="control-label">Seleccionar Accionista</label>
+                            @Html.DropDownList("Accionista", @ViewBag.DrpAccionistas as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "Accionista" })*@
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+        <div class="panel-footer clearfix">
+            <div class="panel-footer text-right">
+                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                <button type="button" class="btn btn-info"
+                        onclick="showModalSearch(this, $('#Cedula').val(), $('#Prestamo_Id').val(), $('#Solicitud_Id').val(), '@ViewBag.Accionista', '_ViewLoan');"
+                        data-url="@(Url.Action("GetAll", "Pagos"))">
+                    Consultar
+                </button>
+            </div>
+        </div>
+        <div id="content-ajax">
+           
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/plugins/fooTable/css/footable.core.css")" rel="stylesheet">
+}
+@section scripts{
+    <!--UtilitiesScripts [ Tiene las funciones especiales usadas en las vistas ]-->
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+<script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+<script type="text/javascript">
+    $('#Cedula').mask('999-9999999-9');
+    function setOnChangeEvent(numero_cuota)
+    {
+        var stringId = String(numero_cuota);
+        $(function () {
+            $("#CobrarMora"+stringId).change(function () {
+                $("#Seleccion" + stringId).val($(this).val());
+            });
+        });
+    }    
+    </script>
+    }
+

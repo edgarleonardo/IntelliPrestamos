@@ -1,0 +1,811 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ] -->
+   
+    <link type="image/x-icon" href="@Url.Content(ViewBag.Url_Icon)" rel="SHORTCUT ICON" />
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/nifty.min.css")" rel="stylesheet">
+
+
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/switchery/switchery.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css")" rel="stylesheet">
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/chosen/chosen.min.css")" rel="stylesheet">
+
+
+    
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.css")" rel="stylesheet">
+
+
+    <!--Dropzone [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/dropzone/dropzone.css")" rel="stylesheet">
+
+
+    <!--Summernote [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/summernote/summernote.min.css")" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="@Url.Content("~/Content/css/demo/nifty-demo.min.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/Content/css/themes/" + ViewBag.ColorLeft + ".min.css")" rel="stylesheet">
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/pace/pace.min.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Content/plugins/pace/pace.min.js")"></script>
+
+
+    @RenderSection("Header", false)
+    <!--
+
+    REQUIRED
+    You must include this in your project.
+
+    RECOMMENDED
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+    OPTIONAL
+    Optional plugins. You may choose whether to include it in your project or not.
+
+    DEMONSTRATION
+    This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+    SAMPLE
+    Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+    Detailed information and more samples can be found in the document.
+
+    -->
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="@Url.Content("~/Content/js/jquery-2.1.1.min.js")"></script>
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body style="font-size: 10px;">
+    <div id="container" class="effect mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand" style="background-color:white;">
+                        <img src="@Url.Content(ViewBag.Url_Image)" alt="@ViewBag.Name" class="brand-icon" style="width: 50px; height: 50px;">
+                        <div class="brand-title">
+                            <span class="brand-text">@ViewBag.Name</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="fa fa-navicon fa-lg"></i>
+                            </a>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End Navigation toogle button-->
+                        <!--Messages Dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Manage")))
+                                    {
+                        if (ViewBag.SolicitudesPendientes != null && ViewBag.SolicitudesPendientes > 0)
+                        {
+                            <li class="dropdown">
+                                <a href="@Url.Action("Manage", "Solicitud")" title="Solicitudes Creadas" >
+                                    <i class="fa fa-envelope fa-lg"></i>
+                                    <span class="badge badge-header badge-warning">@ViewBag.SolicitudesPendientes</span>
+                                </a>
+                        </li>
+                        }
+}
+                        
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End message dropdown-->
+                        <!--Notification dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Pagos" && x.Actions == "Pendientes")))
+                                    {
+                        if (ViewBag.CuotasPendientes != null && ViewBag.CuotasPendientes > 0)
+                        {
+                        <li class="dropdown">
+                            <a href="@Url.Action("Pendientes", "Pagos")" title="Pagos Pendientes" >
+                                <i class="fa fa-bell fa-lg"></i>
+                                <span class="badge badge-header badge-danger">@ViewBag.CuotasPendientes</span>
+                            </a>                           
+                        </li>
+                        }
+}
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End notifications dropdown-->
+                        <!--Mega dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Aprobadas")))
+                                    {
+                        if (ViewBag.SolicitudesAprobadas != null && ViewBag.SolicitudesAprobadas > 0)
+                        {
+                        <li class="mega-dropdown">
+                            <a href="@Url.Action("Aprobadas", "Solicitud")"  title="Solicitudes Aprobadas">
+                                <i class="fa fa-th-large fa-lg"></i>
+                                <span class="badge badge-header badge-danger">@ViewBag.SolicitudesAprobadas</span>
+                            </a>                           
+                        </li>
+                        }
+}
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End mega dropdown-->
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-right">
+
+                        
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End language selector-->
+                        <!--User dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li id="dropdown-user" class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                <span class="pull-right">
+                                    <img class="img-circle img-user media-object" src="@Url.Content("~/Content/img/av1.png")" alt="Profile Picture">
+                                </span>
+                                <div class="username hidden-xs">@ViewBag.UserName</div>
+                            </a>
+
+
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
+
+                                <!-- User dropdown menu -->
+                                <ul class="head-list">
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as List<IntelliPrestamos.Models.Modulos>).Exists(x => (x.Controller == "Perfil" && x.Actions == "Manage")))
+                                    {
+                                        <li>
+                                        <a href="@Url.Action("Manage", "Perfil", new { @cedula = ViewBag.LoggedId, @FechaInicio = DateTime.Now.AddDays((-30)).ToString("yyyy-MM-dd"), @FechaFin = DateTime.Now.ToString("yyyy-MM-dd") })">
+                                            <i class="fa fa-user fa-fw fa-lg"></i> Perfil
+                                        </a>
+                                    </li>
+                                    }
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as 
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Add")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Add", "Solicitud")">
+                                            @*<span class="badge badge-danger pull-right">9</span>*@
+                                            <i class="fa fa-envelope fa-fw fa-lg"></i> Crear Solicitud
+                                        </a>
+                                    </li>
+                                    }
+                                       
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Rechazadas")))
+{
+                                    <li>
+                                        <a href="@Url.Action("Rechazadas", "Solicitud")">
+                                            <i class="fa fa-envelope fa-fw fa-lg"></i>Solicitudes Rechazadas En Sistema
+                                        </a>
+                                    </li>
+                                        }
+                                        @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "SetUp" && x.Actions == "Index")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Index", "SetUp")">
+                                            @*<span class="label label-success pull-right">New</span>*@
+                                            <i class="fa fa-gear fa-fw fa-lg"></i> Configuraciones
+                                        </a>
+                                    </li>
+                                        }
+                                    
+                                    <li>
+                                        <a href="@Url.Action("Ayuda", "SetUp")">
+                                            <i class="fa fa-question-circle fa-fw fa-lg"></i> Ayuda
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Dropdown footer -->
+                                <div class="pad-all text-right">
+                                    <a href="@Url.Action("Logout", "Login")" class="btn btn-primary">
+                                        <i class="fa fa-sign-out fa-fw"></i> Salir
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End user dropdown-->
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+                
+                <!--Page Title-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                @*<div id="page-title">
+                    <h1 class="page-header text-overflow">@ViewBag.Title</h1>
+                </div>*@
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End page title-->
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content" style="min-height: 900px;">
+                    @RenderBody()
+
+
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container" >
+                <div id="mainnav" style="background-color: @(ViewBag.ColorLeft);">
+
+                    <!--Shortcut buttons-->
+                    <!--================================-->
+                    <div id="mainnav-shortcut">
+                        <ul class="list-unstyled">
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Pagos" && x.Actions == "Manage")))
+                                    {
+                            <li class="col-xs-4" data-content="Pagos Prestamos">
+                                <a id="demo-toggle-aside" class="shortcut-grid" href="@Url.Action("Manage", "Pagos")">
+                                    <i class="fa fa-magic"></i>
+                                </a>
+                            </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Aprobadas")))
+                                    {
+                            <li class="col-xs-4" data-content="Solicitudes Aprobadas">
+                                <a id="demo-alert" class="shortcut-grid" href="@Url.Action("Aprobadas", "Solicitud")">
+                                    <i class="fa fa-bullhorn"></i>
+                                </a>
+                            </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Pagos" && x.Actions == "Pendientes")))
+                                    {
+                            <li class="col-xs-4" data-content="Cuotas Por Pagar">
+                                <a id="demo-page-alert" class="shortcut-grid" href="@Url.Action("Pendientes", "Pagos")">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                            </li>
+}
+                        </ul>
+                    </div>
+                    <!--================================-->
+                    <!--End shortcut buttons-->
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+                                <ul id="mainnav-menu" class="list-group">
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "SetUp")))
+                                    {
+                                    <!--Category name-->
+                                    <li class="list-header">Administrador</li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "SetUp" && x.Actions == "Index")))
+                                    {
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Index", "SetUp")">
+                                            <i class="fa fa-gear"></i>
+                                            <span class="menu-title">
+                                                <strong>Datos De La Empresa</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "SetUp" && x.Actions == "Roles")))
+                                    {
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Roles", "SetUp")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Roles En Sistema</strong>
+                                            </span>
+                                        </a>
+
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Cargo" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Cargo")">
+                                            <i class="fa fa-table"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Cargos En Sistema</strong>
+                                            </span>
+                                        </a>
+
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Users" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Users")">
+                                            <i class="fa fa-plug"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Empleados y Usuarios En Sistema</strong>
+                                            </span>
+                                        </a>
+
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Transaction" && x.Actions == "Manage")))
+                                    {
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Transaction")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Tipos Transacciones En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Documentos" && x.Actions == "Manage")))
+                                    {
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Documentos")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Documentos En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+}@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Accionistas" && x.Actions == "Manage")))
+                                    {
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Accionistas")">
+                                            <i class="fa fa-flask"></i>
+                                            <span class="menu-briefcase">
+                                                <strong>Gestión Inversión Accionistas En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+}
+@if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "ReferenceTipos" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "ReferenceTipos")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Tipos Referencias En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+}
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Bancos" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Bancos")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión De Bancos En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Periodicidad" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Periodicidad")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Visualizacion Periodicidades En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" )))
+                                    {
+                                    <li class="list-divider"></li>
+    
+
+                                    <!--Category name-->
+                                    <li class="list-header">Manejo Solicitudes</li>
+                                    }
+                                    
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Views")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Views", "Solicitud")">
+                                            <i class="fa fa-table"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión Solicitudes Creadas En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>                                    
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Solicitud")">
+                                            <i class="fa fa-table"></i>
+                                            <span class="menu-title">
+                                                <strong>Aprobación Solicitudes Creadas En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Solicitud" && x.Actions == "Aprobadas")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Aprobadas", "Solicitud")">
+                                            <i class="fa fa-bullhorn"></i>
+                                            <span class="menu-title">
+                                                <strong>Creación Prestamos En Sistema</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Pagos")))
+                                    {
+                                    <li class="list-header">Manejo Prestamos</li>
+    }
+    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Pagos" && x.Actions == "Manage")))
+                                    {
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Pagos")">
+                                            <i class="fa fa-magic"></i>
+                                            <span class="menu-title">
+                                                <strong>Gestión Pagos Prestamos</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+    } 
+                                    
+                                    <li>
+                                        <a href="@Url.Action("Manage", "PerfilCliente")">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span class="menu-title">
+                                                <strong>Perfil Cliente</strong>
+                                                @*<span class="pull-right badge badge-warning">9</span>*@
+                                            </span>
+                                        </a>
+                                    </li>
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Reportes")))
+                                    {
+                                        <li class="list-header">Reportes</li>
+                                    }
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Reportes" )))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Ganancias", "Reportes")">
+                                                <i class="fa fa-chart"></i>
+                                                <span class="menu-title">
+                                                    <strong>Reportes Ganancias</strong>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    } 
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Reportes")))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Perdidas", "Reportes")">
+                                                <i class="fa fa-chart"></i>
+                                                <span class="menu-title">
+                                                    <strong>Reportes Perdidas</strong>
+                                                    @*<span class="pull-right badge badge-warning">9</span>*@
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.PermissionsList != null && (ViewBag.PermissionsList as
+                                        List<IntelliPrestamos.Models.Modulos>).
+                                        Exists(x => (x.Controller == "Reportes")))
+{
+    <li>
+        <a href="@Url.Action("Prestamos", "Reportes")">
+            <i class="fa fa-chart"></i>
+            <span class="menu-title">
+                <strong>Reportes Prestamos</strong>
+                @*<span class="pull-right badge badge-warning">9</span>*@
+            </span>
+        </a>
+    </li>
+}
+                         
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+            <!--ASIDE-->
+            <!--===================================================-->
+            <aside id="aside-container">
+                <div id="aside">
+                    <div class="nano">
+                        <div class="nano-content">
+
+                            <!--Nav tabs-->
+                            <!--================================-->
+                           
+                            <!--================================-->
+                            <!--End nav tabs-->
+                            <!-- Tabs Content -->
+                            <!--================================-->
+                            
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!--===================================================-->
+            <!--END ASIDE-->
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">v1.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; @(DateTime.Now.Year.ToString()) @ViewBag.Name</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+
+
+    </div>
+    
+    <!--===================================================-->
+    <!-- END SETTINGS -->
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+   
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+
+
+    <!--Fast Click [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/fast-click/fastclick.min.js")"></script>
+
+
+    <!--Nifty Admin [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Content/js/nifty.min.js")"></script>
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/switchery/switchery.min.js")"></script>
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.js")"></script>
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js")"></script>
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/chosen/chosen.jquery.min.js")"></script>
+
+
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js")"></script>
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.js")"></script>
+
+
+    <!--Dropzone [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/dropzone/dropzone.min.js")"></script>
+
+
+    <!--Summernote [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/summernote/summernote.min.js")"></script>
+
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    @*<script src="@Url.Content("~/Content/js/demo/nifty-demo.min.js")"></script>*@
+
+    <script src="@Url.Content("~/Content/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+
+    <script src="@Url.Content("~/Content/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+   
+    
+    <script type="text/javascript">
+        var faIcon = {
+            valid: 'fa fa-check-circle fa-lg text-success',
+            invalid: 'fa fa-times-circle fa-lg',
+            validating: 'fa fa-refresh'
+        }
+        </script>
+
+        @RenderSection("scripts", required: false)
+
+
+    </body>
+    </html>

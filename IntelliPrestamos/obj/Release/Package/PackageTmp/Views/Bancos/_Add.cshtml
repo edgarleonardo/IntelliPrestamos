@@ -1,0 +1,91 @@
+﻿@model IntelliPrestamos.Models.Bancos
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Crear/Editar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    @Html.HiddenFor(m => m.Id_Bancos, new { @id = "Id_Bancos" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Nombre Banco:</label>
+                                    @Html.TextBoxFor(m => m.Nombre_Banco, new { @class = "form-control", @id = "Nombre_Banco" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Web Banco:</label>
+                                        @Html.TextBoxFor(m => m.Web_Banco, new { @class = "form-control", @id = "Web_Banco" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Web Internet Banking:</label>
+                                    @Html.TextBoxFor(m => m.Web_Int_Banking, new { @class = "form-control", @id = "Web_Int_Banking" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-url="@(Url.Action("GetAll", "Bancos"))" onclick="showRefreshViews(this, '_View');">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Bancos"))">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        // validate the contact form when it is submitted
+        $("#AddConfigUpdate").validate({
+
+            rules: {
+                Tipo_Referencia_Desc: { required: true }
+            },
+            messages: {
+                Tipo_Referencia_Desc: "* Campo obligatorio"
+            }
+        });
+
+    });
+
+</script>
+

@@ -1,0 +1,16 @@
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\IntelliPrestamo.AccessLayer.dll.config
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\IntelliPrestamo.AccessLayer.dll
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\IntelliPrestamo.AccessLayer.pdb
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\EntityFramework.dll
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\EntityFramework.xml
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Debug\IntelliPrestamo.AccessLayer.csprojResolveAssemblyReference.cache
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Debug\IntelliPrestamo.AccessLayer.dll
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\obj\Debug\IntelliPrestamo.AccessLayer.pdb
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\IntelliPrestamos.Models.dll
+c:\users\carlos\documents\visual studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\IntelliPrestamos.Models.pdb
+C:\Users\CARLOS\Documents\Visual Studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\wnvhtmlconvert.dll
+C:\Users\CARLOS\Documents\Visual Studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\wnvhtmltopdf.dll
+C:\Users\CARLOS\Documents\Visual Studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\wnvhtmltopdf.xml
+C:\Users\CARLOS\Documents\Visual Studio 2013\Projects\IntelliPrestamos\IntelliPrestamo.AccessLayer\bin\Debug\wnvinternal.dat
